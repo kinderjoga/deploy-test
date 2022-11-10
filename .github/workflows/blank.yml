@@ -18,19 +18,18 @@ jobs:
   # This workflow contains a single job called "build"
   deploy:
     # The type of runner that the job will run on
-    - run: ubuntu-latest
+    run-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v3
 
       #setup key
-      runs-on: self-hosted
-      runs-on: |
-        set -eu
-        mkdir "$HOME/.ssh/key"
-        echo "${{ secrets.DEPLOY_TEST_KEY}}" > "$HOME/.ssh/key"
-        chmod 600 "$HOME/.ssh/key"
+      -run : self-hosted
+      - run: set -eu
+      - run: mkdir "$HOME/.ssh/key"
+      - run: echo "${{ secrets.DEPLOY_TEST_KEY}}" > "$HOME/.ssh/key"
+      - run: chmod 600 "$HOME/.ssh/key"
 
       #deploy
-      runs-on: rsync -e "ssh -p 20022 -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . u1698197@31.31.196.38:/home/u1698197/data/www/mysite-kj.site
+      - run: rsync -e "ssh -p 20022 -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . u1698197@31.31.196.38:/home/u1698197/data/www/mysite-kj.site
