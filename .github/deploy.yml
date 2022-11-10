@@ -1,0 +1,21 @@
+﻿name: Deploy
+
+On:
+  push:
+  branches:
+    - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - users:
+
+      #setup key
+      - run: set -eu
+      - run: mkdir "$HOME/.ssh/DEPLOY_TEST_KEY"
+      - run: echo "${{ secrets.DEPLOY_TEST_KEY}}" > "$HOME/.ssh/DEPLOY_TEST_KEY"
+      - run: chmod 600 "$HOME/.ssh/DEPLOY_TEST_KEY"
+
+      #deploy
+      - run: rsinc -e "ssh -p 20022 -i $HOME/.ssh/DEPLOY_TEST_KEY -o StrictHostKeyChecking=no" --archive --compress --delete u1698197@31.31.196.38:/var/www/u1698197/data/www/mysite-kj.site
