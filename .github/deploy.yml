@@ -18,4 +18,4 @@ jobs:
       - run: chmod 600 "$HOME/.ssh/DEPLOY_TEST_KEY"
 
       #deploy
-      - run: rsinc -e "ssh -p 20022 -i $HOME/.ssh/DEPLOY_TEST_KEY -o StrictHostKeyChecking=no" --archive --compress --delete u1698197@31.31.196.38:/var/www/u1698197/data/www/mysite-kj.site
+      - run: rsinc -e "ssh -p 20022 -i $HOME/.ssh/DEPLOY_TEST_KEY -o StrictHostKeyChecking=no" --archive --compress --delete . u1698197@31.31.196.38:/var/www/u1698197/data/www/mysite-kj.site
