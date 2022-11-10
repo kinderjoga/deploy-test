@@ -29,4 +29,4 @@ jobs:
       - run: echo "${{ secrets.key}}" > "$HOME/.ssh/key"
       - run: chmod 600 "$HOME/.ssh/key"
       #deploy
-      - run: rsync -e "ssh -p 1500 -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . u1698197@31.31.196.38:/var/www/u1698197/data/www/mysite-kj.site
+      - run: rsync -e "ssh -p 21098 -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . u1698197@31.31.196.38:/var/www/u1698197/data/www/mysite-kj.site
