@@ -23,10 +23,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       #setup key
-      - run : self-hosted
+      #- run : self-hosted
       - run: set -eu
       - run: mkdir "$HOME/.ssh/key"
-      - run: echo "${{ secrets.DEPLOY_TEST_KEY}}" > "$HOME/.ssh/key"
+      - run: echo "${{ secrets.key}}" > "$HOME/.ssh/key"
       - run: chmod 600 "$HOME/.ssh/key"
       #deploy
       - run: rsync -e "ssh -p 20022 -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . u1698197@31.31.196.38:/home/u1698197/data/www/mysite-kj.site
