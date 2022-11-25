@@ -6,9 +6,9 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: "main"
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -26,7 +26,8 @@ jobs:
       #- run : self-hosted
       - run: set -eu
       - run: mkdir "$HOME/.ssh"
-      - run: echo "$" > "$HOME/.ssh/key"
-      - run: chmod 600 "$HOME/.ssh/key"
+      - run: echo "$" > "$HOME/.ssh/deploykey"
+      - run: chmod 600 "$HOME/.ssh/deploykey"
       #deploy
-      - run: rsync -e "ssh -p 21098 -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . u1698197@31.31.196.38:/var/www/mysite-kj.site
+      # - run: rsync -e "ssh -p 21098 -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . u1698197@server228.hosting.reg.ru:/var/www/mysite-kj.site
+      - run: rsync -avz --perms --chmod=D0755,F0644 -e "ssh -o StrictHostKeyChecking=no -o IdentitiesOnly=yes -i $HOME/.ssh/deploykey " --archive --compress --delete . u1698197@31.31.196.38:/var/www/mysite-kj.site
